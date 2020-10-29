@@ -18,6 +18,8 @@ from django.urls import path, include
 from pages import urls as pages_url
 from listings import urls as listings_url
 from realtors import urls as realtors_url
+from accounts import urls as accounts_url
+from contacts import urls as contacts_url
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -25,4 +27,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("", include(pages_url)),
     path("listings/", include(listings_url)),
+    path("accounts/", include(accounts_url)),
+    path("contacts/", include(contacts_url)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
