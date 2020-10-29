@@ -1,0 +1,76 @@
+MODEL/DB FIELDS 
+
+## LISTING 
+id: INT
+realtorID: INT(FK from realtor)
+title: STR 
+address: STR
+city: STR 
+state: STR 
+zipcode: STR 
+description: TEXT 
+price: INT 
+bedrooms: INT 
+bathrooms: INT 
+garage: INT [0]
+list_date: DATE 
+sqft: INT 
+lot_size: FLOAT 
+photo_main: STR 
+photo_1: STR
+photo_2: STR
+photo_3: STR
+photo_4: STR
+photo_5: STR
+photo_6: STR
+is_published: BOOLEAN [true]
+
+
+## REALTOR 
+id: INT 
+name: STR 
+photo: STR 
+description: TEXT 
+email: EMAIL 
+phone: STR 
+is_mvp: BOOLEAN [false]
+hire_date: DATE 
+
+## CONTACT
+id: INT 
+user_id: INT 
+listing: INT
+listing_id: INT 
+name: STR 
+email: STR 
+phone: STR 
+message: TXT 
+contact_date: DATE 
+
+
+To get the SQL 
+
+gaurnitai at rsharmas-MacBook-Pro in ~/Desktop/BTRE/django-project/real-estate/btre --python manage.py sqlmigrate listings 0001BEGIN;
+--
+-- Create model Listing
+--
+CREATE TABLE "listings_listing" ("id" serial NOT NULL PRIMARY KEY, "title" varchar(200) NOT NULL, "address" varchar(200) NOT NULL, "city" varchar(50) NOT NULL, "state" varchar(50) NOT NULL, "zipcode" varchar(20) NOT NULL, "description" text NOT NULL, "price" integer NOT NULL, "bedrooms" integer NOT NULL, "bathrooms" numeric(2, 1) NOT NULL, "garage" integer NOT NULL, "sqft" integer NOT NULL, "lot_size" numeric(5, 1) NOT NULL, "photo_main" varchar(100) NOT NULL, "photo_1" varchar(100) NOT NULL, "photo_2" varchar(100) NOT NULL, "photo_3" varchar(100) NOT NULL, "photo_4" varchar(100) NOT NULL, "photo_5" varchar(100) NOT NULL, "photo_6" varchar(100) NOT NULL, "is_published" boolean NOT NULL, "list_date" timestamp with time zone NOT NULL, "realtors_id" integer NOT NULL);
+ALTER TABLE "listings_listing" ADD CONSTRAINT "listings_listing_realtors_id_7c75e25a_fk_realtors_realtor_id" FOREIGN KEY ("realtors_id") REFERENCES "realtors_realtor" ("id") DEFERRABLE INITIALLY DEFERRED;
+CREATE INDEX "listings_listing_realtors_id_7c75e25a" ON "listings_listing" ("realtors_id");
+COMMIT;
+
+# ERROR - Django - Gmail - SMTPAuthenticationError
+https://www.digitalocean.com/community/questions/django-gmail-smtpauthenticationerror
+It is because Google blocks sign-in attempts from apps which do not use modern security standards (mentioned on their support page). You can however, turn on/off this safety feature by going to the link below:
+
+Go to this link and select Turn On
+
+https://www.google.com/settings/security/lesssecureapps
+
+Moreover google block an ip when you try to send a email since a unusual location, so, you can unblock in the next link
+
+https://support.google.com/accounts/answer/6009563
+
+and clicked in
+
+accounts.google.com/DisplayUnlockCaptcha
